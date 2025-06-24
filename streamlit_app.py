@@ -4,8 +4,7 @@ from snowflake.snowpark.functions import col
 import requests
 
 smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-st.text(smoothiefroot_response.json())
-st_df = st.dataframe(smoothiefroot_response.json())
+
 # Write directly to the app
 st.title(f":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
 st.write(
@@ -38,6 +37,7 @@ if ingredients_list:
     #st.write(ingredients_list)
 
     result = ' '.join(ingredients_list)
+    st_df = st.dataframe(smoothiefroot_response.json())
 
     my_insert_stmt = f"insert into smoothies.public.orders(ingredients, name_on_order) values ('{result}','{name_on_order}')"
 
